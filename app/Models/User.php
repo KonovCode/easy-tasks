@@ -58,4 +58,9 @@ class User extends Authenticatable implements JWTSubject
             'email' => $this->email,
         ];
     }
+
+    public function categories(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+       return $this->hasMany(Category::class);
+    }
 }
