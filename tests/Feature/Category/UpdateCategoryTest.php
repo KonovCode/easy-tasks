@@ -27,10 +27,10 @@ class UpdateCategoryTest extends TestCase
 
         $response->assertStatus(200)
             ->assertJsonStructure([
-                'data' => ['id', 'title', 'created_at']
+                'data' => ['id', 'title', 'created_at'],
             ])
             ->assertJson([
-                'data' => ['title' => 'New Title']
+                'data' => ['title' => 'New Title'],
             ]);
 
         $this->assertDatabaseHas('categories', [

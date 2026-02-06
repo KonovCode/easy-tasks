@@ -26,8 +26,8 @@ class IndexCategoryTest extends TestCase
             ->assertJsonCount(3, 'data')
             ->assertJsonStructure([
                 'data' => [
-                    '*' => ['id', 'title', 'created_at']
-                ]
+                    '*' => ['id', 'title', 'created_at'],
+                ],
             ]);
     }
 

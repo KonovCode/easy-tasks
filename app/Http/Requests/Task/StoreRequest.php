@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Category;
+namespace App\Http\Requests\Task;
 
-use Illuminate\Contracts\Validation\Validator;
+use App\Enums\Task\PriorityEnum;
+use App\Enums\Task\StatusEnum;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Validation\Rule;
 
 class StoreRequest extends FormRequest
 {
@@ -25,13 +26,15 @@ class StoreRequest extends FormRequest
     {
         return [
             'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'deadline' => 'nullable|date',
+            'priority' => [Rule::enum(PriorityEnum::class)],
+            'status' => [Rule::enum(StatusEnum::class)],
+            'category_id' => [
+                'nullable',
+                'integer',
+                Rule::exists('categories', 'id')->where('user_id', auth()->id()),
+            ],
         ];
-    }
-
-    protected function failedValidation(Validator $validator): void
-    {
-        throw new HttpResponseException(
-            response()->json($validator->errors(), 422)
-        );
     }
 }

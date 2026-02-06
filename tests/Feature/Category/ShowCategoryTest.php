@@ -25,13 +25,13 @@ class ShowCategoryTest extends TestCase
 
         $response->assertStatus(200)
             ->assertJsonStructure([
-                'data' => ['id', 'title', 'created_at']
+                'data' => ['id', 'title', 'created_at'],
             ])
             ->assertJson([
                 'data' => [
                     'id' => $category->id,
                     'title' => 'Work',
-                ]
+                ],
             ]);
     }
 

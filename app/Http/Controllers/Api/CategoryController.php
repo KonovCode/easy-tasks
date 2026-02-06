@@ -7,7 +7,6 @@ use App\Http\Requests\Category\StoreRequest;
 use App\Http\Resources\CategoryResource;
 use Illuminate\Http\JsonResponse;
 
-
 class CategoryController extends Controller
 {
     public function index(): \Illuminate\Http\Resources\Json\AnonymousResourceCollection

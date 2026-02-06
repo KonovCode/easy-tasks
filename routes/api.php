@@ -16,5 +16,5 @@ Route::middleware('auth:api')->group(function () {
     });
 
     Route::apiResource('categories', \App\Http\Controllers\Api\CategoryController::class);
+    Route::apiResource('tasks', \App\Http\Controllers\Api\TaskController::class);
 });
-

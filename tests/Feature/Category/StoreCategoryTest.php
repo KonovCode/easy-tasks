@@ -21,10 +21,10 @@ class StoreCategoryTest extends TestCase
 
         $response->assertStatus(201)
             ->assertJsonStructure([
-                'data' => ['id', 'title', 'created_at']
+                'data' => ['id', 'title', 'created_at'],
             ])
             ->assertJson([
-                'data' => ['title' => 'Work']
+                'data' => ['title' => 'Work'],
             ]);
 
         $this->assertDatabaseHas('categories', [

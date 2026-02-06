@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
- * @mixin \App\Models\Category
+ * @mixin \App\Models\Task
  */
-class CategoryResource extends JsonResource
+class TaskResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -20,7 +20,11 @@ class CategoryResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
-            'created_at' => $this->created_at->toISOString(),
+            'description' => $this->description,
+            'deadline' => $this->deadline,
+            'priority' => $this->priority,
+            'status' => $this->status,
+            'category' => CategoryResource::make($this->whenLoaded('category')),
         ];
     }
 }
