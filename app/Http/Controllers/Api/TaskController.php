@@ -2,15 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Filters\TaskFilter;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Task\FilterRequest;
 use App\Http\Requests\Task\StoreRequest;
 use App\Http\Resources\TaskResource;
 
 class TaskController extends Controller
 {
-    public function index(): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+    public function index(FilterRequest $request, TaskFilter $filter): \Illuminate\Http\Resources\Json\AnonymousResourceCollection
     {
-        $tasks = auth()->user()->tasks()->with('category')->latest()->paginate(20);
+        $tasks = $filter->apply(auth()->user()->tasks()->with('category')->getQuery(), $request->validated())
+            ->latest()
+            ->paginate(20);
 
         return TaskResource::collection($tasks);
     }
